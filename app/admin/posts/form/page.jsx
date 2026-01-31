@@ -257,8 +257,11 @@ function PostsForm({ postId }) {
 
 // ================= PAGE =================
 // ✅ use `searchParams` prop instead of useSearchParams
-export default function Page({ searchParams }) {
-  const postId = searchParams?.id || null;
+// ✅ Page must be async to unwrap searchParams
+export default async function Page({ searchParams }) {
+  // 🔹 unwrap searchParams
+  const params = await searchParams;
+  const postId = params?.id || null;
 
   return (
     <PostsFormContextProvider>

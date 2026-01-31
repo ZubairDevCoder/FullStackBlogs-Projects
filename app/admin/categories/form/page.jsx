@@ -181,8 +181,10 @@ function CategoryFormContent({ categoryId }) {
 
 // ================= PAGE =================
 // ✅ use `searchParams` prop instead of useSearchParams
-export default function Page({ searchParams }) {
-  const categoryId = searchParams?.id || null;
+export default async function Page({ searchParams }) {
+  // ✅ unwrap searchParams (since it's a Promise in Next.js 16.1+)
+  const params = await searchParams;
+  const categoryId = params?.id || null;
 
   return (
     <CategoriesFormContextProvider>

@@ -19,11 +19,11 @@ export default async function Page({ params }) {
       {/* 🔥 CATEGORY HEADER */}
       {category && (
         <div className="flex items-center gap-4  pb-4 justify-center">
-          <div className="text-center md:text-left max-w-xl mx-auto py-6 animate-fadeInUp">
+          <div className="text-center md:text-left max-w-xl mx-auto py-3 animate-fadeInUp">
             <div className="text-center  max-w-2xl mx-auto py-4 animate-fadeInUp space-y-4">
               {/* Main Hook */}
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 text-blue-700 dark:text-white">
-                {category.name}
+              <h1 className="text-3xl md:text-5xl font-bold mb-6 text-indigo-700 dark:text-white">
+                {category.name} Category
                 <br />
                 <span className="text-purple-600 text-xl md:text-2xl font-medium">
                   Tutorials & Guides

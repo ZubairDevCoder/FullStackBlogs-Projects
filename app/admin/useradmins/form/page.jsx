@@ -145,7 +145,12 @@ function AdminsFormContent({ adminEmail }) {
 }
 
 // ================= PAGE =================
-export default function Page({ searchParams }) {
-  const adminEmail = searchParams?.id || null; // ✅ use props instead of useSearchParams
+// ✅ Page must be async to unwrap searchParams
+export default async function Page({ searchParams }) {
+  // 🔹 unwrap searchParams Promise
+  const params = await searchParams;
+  const adminEmail = params?.id || null; // email as ID
+
   return <AdminsFormContent adminEmail={adminEmail} />;
 }
+
