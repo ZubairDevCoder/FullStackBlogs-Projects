@@ -262,7 +262,7 @@ export default async function Page({ searchParams }) {
   // 🔹 unwrap searchParams
   const params = await searchParams;
   const postId = params?.id || null;
-
+hy
   return (
     <PostsFormContextProvider>
       <PostsForm postId={postId} />
