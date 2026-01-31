@@ -1,8 +1,8 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
-import { useAdminsForm } from "./contexts/AdminsFormContext";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAdminsForm } from "./contexts/AdminsFormContext";
 import { toast } from "sonner";
 
 import { db, storage } from "@/lib/firebase";
@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+// ================= FORM =================
 function AdminsFormContent({ adminEmail }) {
   const router = useRouter();
   const {
@@ -143,9 +144,8 @@ function AdminsFormContent({ adminEmail }) {
   );
 }
 
-/* ================= PAGE ================= */
-export default function Page() {
-  const searchParams = useSearchParams();
-  const adminEmail = searchParams.get("id"); // email as ID
+// ================= PAGE =================
+export default function Page({ searchParams }) {
+  const adminEmail = searchParams?.id || null; // ✅ use props instead of useSearchParams
   return <AdminsFormContent adminEmail={adminEmail} />;
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import {
   PostsFormContextProvider,
   usePostsForm,
@@ -21,7 +20,9 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
+// ================= POSTS FORM =================
 function PostsForm({ postId }) {
   const {
     register,
@@ -100,7 +101,6 @@ function PostsForm({ postId }) {
   // ---------------- SUBMIT ----------------
   const submitHandler = async (data) => {
     try {
-      // 🔎 FIND SELECTED AUTHOR & CATEGORY
       const selectedAuthor = authors.find((a) => a.id === data.authorId);
       const selectedCategory = categories.find((c) => c.id === data.categoryId);
 
@@ -108,7 +108,6 @@ function PostsForm({ postId }) {
         return toast.error("Please select both author and category");
       }
 
-      // ✅ PAYLOAD TO SAVE
       const payload = {
         name: data.name,
         slug: data.slug,
@@ -137,15 +136,15 @@ function PostsForm({ postId }) {
   };
 
   return (
-    <Card >
+    <Card>
       <CardHeader>
         <CardTitle>{postId ? "Edit Post" : "Create New Post"}</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col gap-4 lg:flex-row w-full ">
-        <div className="flex-1 ">
+      <CardContent className="flex flex-col gap-4 lg:flex-row w-full">
+        <div className="flex-1">
           <form
             onSubmit={handleSubmit(submitHandler)}
-            className="space-y-5 w-full "
+            className="space-y-5 w-full"
           >
             {/* TITLE */}
             <div>
@@ -256,9 +255,10 @@ function PostsForm({ postId }) {
   );
 }
 
-export default function Page() {
-  const searchParams = useSearchParams();
-  const postId = searchParams.get("id");
+// ================= PAGE =================
+// ✅ use `searchParams` prop instead of useSearchParams
+export default function Page({ searchParams }) {
+  const postId = searchParams?.id || null;
 
   return (
     <PostsFormContextProvider>

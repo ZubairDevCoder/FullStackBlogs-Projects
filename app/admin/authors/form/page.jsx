@@ -1,17 +1,21 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAuthorsForm } from "./contexts/AuthorsFormContext";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { db, storage } from "@/lib/firebase";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { nanoid } from "nanoid";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { nanoid } from "nanoid";
+
+// Force client-side rendering
+export const dynamic = "force-dynamic";
 
 // ================= FORM =================
 function AuthorsFormContent({ authorId }) {
@@ -132,7 +136,7 @@ function AuthorsFormContent({ authorId }) {
                   message: "Invalid email address",
                 },
               })}
-              disabled={!!authorId} // disable email on edit
+              disabled={!!authorId}
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">
@@ -171,9 +175,8 @@ function AuthorsFormContent({ authorId }) {
 }
 
 // ================= PAGE =================
-export default function Page() {
-  const searchParams = useSearchParams(); // ✅ Client component, useSearchParams safe
-  const authorId = searchParams.get("id"); // Firestore doc ID
-
+// Instead of useSearchParams(), receive `searchParams` as prop
+export default function Page({ searchParams }) {
+  const authorId = searchParams?.id || null;
   return <AuthorsFormContent authorId={authorId} />;
 }

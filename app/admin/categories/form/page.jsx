@@ -1,6 +1,5 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
 import {
   CategoriesFormContextProvider,
   useCategoryForm,
@@ -15,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // ================= FORM =================
 function CategoryFormContent({ categoryId }) {
@@ -80,7 +80,6 @@ function CategoryFormContent({ categoryId }) {
       const docId = categoryId || data.slug;
       let imageUrl = preview;
 
-      // Upload new image if selected
       if (data.image?.[0]) {
         const imageRef = ref(storage, `categories/${docId}`);
         await uploadBytes(imageRef, data.image[0]);
@@ -181,9 +180,9 @@ function CategoryFormContent({ categoryId }) {
 }
 
 // ================= PAGE =================
-export default function Page() {
-  const searchParams = useSearchParams();
-  const categoryId = searchParams.get("id");
+// ✅ use `searchParams` prop instead of useSearchParams
+export default function Page({ searchParams }) {
+  const categoryId = searchParams?.id || null;
 
   return (
     <CategoriesFormContextProvider>
