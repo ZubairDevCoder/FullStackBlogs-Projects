@@ -31,19 +31,24 @@ function AuthorsFormContent({ authorId }) {
     if (!authorId) return;
 
     const load = async () => {
-      const snap = await getDoc(doc(db, "authors", authorId));
-      if (!snap.exists()) {
-        toast.error("Author not found");
-        return;
-      }
+      try {
+        const snap = await getDoc(doc(db, "authors", authorId));
+        if (!snap.exists()) {
+          toast.error("Author not found");
+          return;
+        }
 
-      const data = snap.data();
-      reset({
-        name: data.name,
-        email: data.email || "",
-        image: null,
-      });
-      setPreview(data.iconURL);
+        const data = snap.data();
+        reset({
+          name: data.name,
+          email: data.email || "",
+          image: null,
+        });
+        setPreview(data.iconURL);
+      } catch (e) {
+        console.error(e);
+        toast.error("Failed to load author");
+      }
     };
 
     load();
@@ -167,7 +172,7 @@ function AuthorsFormContent({ authorId }) {
 
 // ================= PAGE =================
 export default function Page() {
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams(); // ✅ Client component, useSearchParams safe
   const authorId = searchParams.get("id"); // Firestore doc ID
 
   return <AuthorsFormContent authorId={authorId} />;

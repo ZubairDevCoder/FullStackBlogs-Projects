@@ -63,11 +63,15 @@ export default function Navbar() {
         {/* LOGO */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo.png"
-            alt="Logo"
-            width={100}
-            height={40}
-            className="transition-transform duration-300 hover:scale-110 dark:invert"
+            src="/zub-blog.png"
+            alt="Zubi Coding Blogs Logo"
+            width={200}
+            height={80}
+            priority
+            sizes="(max-width: 640px) 120px,
+         (max-width: 768px) 150px,
+         200px"
+            className="w-[120px] sm:w-[150px] md:w-[200px] h-auto object-contain transition-transform duration-300 hover:scale-105"
           />
         </Link>
 
@@ -120,7 +124,6 @@ export default function Navbar() {
                 <Profile />
               ) : (
                 <div
-                 
                   title={user.name || "User"} // fallback title
                 >
                   <Profile />
@@ -149,13 +152,16 @@ export default function Navbar() {
               </SheetTrigger>
 
               <SheetContent side="left" className="bg-white dark:bg-gray-900">
-                <Link href="/" className="block px-4 py-3">
+                <Link href="/" className="block ">
                   <Image
-                    src="/logo.png"
-                    alt="Logo"
-                    className="dark:invert"
-                    width={90}
-                    height={40}
+                    src="/zub-blog.png"
+                    alt="Zubi Coding Blogs Logo"
+                    width={200}
+                    height={80}
+                    sizes="(max-width: 640px) 120px,
+         (max-width: 768px) 150px,
+         200px"
+                    className="w-[110px] sm:w-[140px] md:w-[200px] h-auto object-contain"
                   />
                 </Link>
 

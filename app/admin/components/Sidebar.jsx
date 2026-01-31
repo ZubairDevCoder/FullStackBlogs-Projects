@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Sidebar() {
   const pathname = usePathname();
-const router = useRouter();
+  const router = useRouter();
 
   const links = [
     {
@@ -40,14 +40,14 @@ const router = useRouter();
       icon: Crown,
     },
   ];
-const handleLogout = async () => {
-  try {
-    await signOut(auth);
-    router.replace("/");
-  } catch (error) {
-    console.error("Logout failed", error);
-  }
-};
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      router.replace("/");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
 
   return (
     <aside className="w-64 min-h-screen border-r bg-white dark:bg-gray-900 relative dark:border-gray-800">

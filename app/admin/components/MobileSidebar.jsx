@@ -10,12 +10,16 @@ import {
   Crown,
   Menu,
 } from "lucide-react";
-
+import { useRouter } from "next/navigation";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { LogOut } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function MobileSidebar() {
   const pathname = usePathname();
-
+  const router = useRouter();
   const links = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
     { name: "Posts", href: "/admin/posts", icon: LayoutList },
@@ -23,7 +27,14 @@ export default function MobileSidebar() {
     { name: "Authors", href: "/admin/authors", icon: User },
     { name: "Admins", href: "/admin/useradmins", icon: Crown },
   ];
-
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      router.replace("/");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
   return (
     <Sheet>
       {/* Hamburger Button */}
@@ -64,6 +75,16 @@ export default function MobileSidebar() {
             );
           })}
         </nav>
+        <div className="absolute bottom-4  left-0 w-full px-3 ">
+          <Button
+            variant="default"
+            className="w-50 mx-auto  flex items-center gap-2 justify-center"
+            onClick={handleLogout}
+          >
+            <LogOut size={18} />
+            Logout
+          </Button>
+        </div>
       </SheetContent>
     </Sheet>
   );
