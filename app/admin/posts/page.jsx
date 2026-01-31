@@ -1,0 +1,25 @@
+import { Button } from "@/components/ui/button";
+import { CirclePlus } from "lucide-react";
+import Link from "next/link";
+import PostsListview from "./components/PostsListview";
+
+export default function Page() {
+  return (
+    <>
+      <main className="px-2 py-2 w-full overflow-hidden">
+        <div className="flex items-center justify-between">
+          <h1 className="font-bold text-xl">Posts</h1>
+          <Link href={`/admin/posts/form`}>
+            <Button>
+              <CirclePlus />
+              Add
+            </Button>
+          </Link>
+        </div>
+        <div className=" my-4 bg-white dark:bg-gray-800">
+          <PostsListview />
+        </div>
+      </main>
+    </>
+  );
+}
