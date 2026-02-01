@@ -58,20 +58,17 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+    <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-1.5">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* LOGO */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/zub-blog.png"
+            src="/Zub-Dev-Coder-logo.png"
             alt="Zubi Coding Blogs Logo"
-            width={200}
-            height={80}
+            width={180}
+            height={5}
             priority
-            sizes="(max-width: 640px) 120px,
-         (max-width: 768px) 150px,
-         200px"
-            className="w-[120px] sm:w-[150px] md:w-[200px] h-auto object-contain transition-transform duration-300 hover:scale-105"
+            className="  transition-transform duration-300 hover:scale-105 "
           />
         </Link>
 
@@ -153,15 +150,10 @@ export default function Navbar() {
 
               <SheetContent side="left" className="bg-white dark:bg-gray-900">
                 <Link href="/" className="block ">
-                  <Image
-                    src="/zub-blog.png"
+                  <img
+                    src="/Zub-Dev-Coder-logo.png"
                     alt="Zubi Coding Blogs Logo"
-                    width={200}
-                    height={80}
-                    sizes="(max-width: 640px) 120px,
-         (max-width: 768px) 150px,
-         200px"
-                    className="w-[110px] sm:w-[140px] md:w-[200px] h-auto object-contain"
+                    className=" object-contain w-30"
                   />
                 </Link>
 
