@@ -3,7 +3,7 @@
 import { createContext, useContext } from "react";
 import { useForm } from "react-hook-form";
 
-import { createNewAdmins } from "@/lib/firebase/Admins/write";
+import { createNewAdmins } from "@/lib/firebase/admins/write";
 
 // ✅ Context ka alag naam
 const AdminsFormContext = createContext(null);
