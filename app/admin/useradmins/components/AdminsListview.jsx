@@ -31,8 +31,9 @@ import {
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 import { MoreVertical } from "lucide-react";
-import { useAdmins } from "@/lib/firebase/Admins/read";
+import { useAdmins } from "@/lib/firebase/admins/read";
 import { deleteAdmins } from "@/lib/firebase/admins/write";
+
 
 // ================= TABLE SKELETON =================
 function AdminsTableSkeleton({ rows = 5 }) {

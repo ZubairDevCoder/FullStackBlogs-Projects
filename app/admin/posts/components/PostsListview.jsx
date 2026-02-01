@@ -1,7 +1,7 @@
 "use client";
 
-import { usePosts } from "@/lib/firebase/Posts/read";
-import { deletePosts } from "@/lib/firebase/Posts/write";
+import { usePosts } from "@/lib/firebase/posts/read";
+import { deletePosts } from "@/lib/firebase/posts/write";
 import { useState, useEffect } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {

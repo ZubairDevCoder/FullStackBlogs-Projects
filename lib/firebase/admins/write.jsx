@@ -8,7 +8,7 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
-import { createNewAdmins } from "@/lib/firebase/admins/write";
+
 /* ================= CREATE ADMIN ================= */
 export const createNewAdmins = async ({ name, email, image }) => {
   if (!name || !email || !image) {

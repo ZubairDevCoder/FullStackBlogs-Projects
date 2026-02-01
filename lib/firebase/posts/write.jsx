@@ -9,7 +9,6 @@ import {
   deleteObject,
 } from "firebase/storage";
 
-import { deletePosts } from "@/lib/firebase/posts/write";
 // 🔹 CREATE Posts
 export const createNewPosts = async (data) => {
   if (!data.name) throw new Error("Name is required");

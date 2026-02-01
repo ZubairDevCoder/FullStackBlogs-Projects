@@ -4,7 +4,7 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import useSWRSubscription from "swr/subscription";
 import { db } from "@/lib/firebase";
-import { useAdmins } from "@/lib/firebase/admins/read";
+
 export function useAdmins() {
   const { data, error } = useSWRSubscription(
     ["admins"],
