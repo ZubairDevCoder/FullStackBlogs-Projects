@@ -92,13 +92,15 @@ function AdminsFormContent({ adminEmail }) {
   };
 
   return (
-    <Card className="max-w-lg mx-auto my-6">
+    <Card className="max-w-lg mx-auto my-2">
       <CardHeader>
-        <CardTitle>{adminEmail ? "Edit Admin" : "Create Admin"}</CardTitle>
+        <CardTitle className="text-xl font-semibold tracking-tight text-center mt-1 text-purple-700 dark:text-white">
+          {adminEmail ? "Edit Admin" : "Create Admin"}
+        </CardTitle>
       </CardHeader>
 
-      <CardContent>
-        <form onSubmit={handleSubmit(submitHandler)} className="space-y-4">
+      <CardContent className="px-4 ">
+        <form onSubmit={handleSubmit(submitHandler)} className="space-y-4 ">
           <div>
             <Label>Full Name</Label>
             <Input

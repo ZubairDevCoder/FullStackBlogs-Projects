@@ -113,7 +113,7 @@ function TableCell({
     <td
       data-slot="table-cell"
       className={cn(
-        "p-2 align-middle text-center whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border-l-2 border-gray-200 dark:border-gray-200 cursor-pointer ",
+        "p-1 align-middle text-center whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border-l-2 border-gray-200 dark:border-gray-200 cursor-pointer ",
         className,
       )}
       {...props}

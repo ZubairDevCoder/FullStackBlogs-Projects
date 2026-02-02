@@ -107,14 +107,14 @@ function CategoryFormContent({ categoryId }) {
   };
 
   return (
-    <Card className="w-full mx-4 my-4 h-fit">
+    <Card className="w-full  my-4 h-fit overflow-hidden">
       <CardHeader>
-        <CardTitle>
+        <CardTitle className="text-xl font-semibold tracking-tight text-center mt-1 text-purple-700 dark:text-white">
           {categoryId ? "Edit Category" : "Create Category"}
         </CardTitle>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="px-4">
         <form onSubmit={handleSubmit(submitHandler)} className="space-y-4">
           {/* Name */}
           <div>

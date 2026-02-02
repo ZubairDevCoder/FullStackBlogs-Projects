@@ -3,6 +3,10 @@
 import { usePosts } from "@/lib/firebase/posts/read";
 import { deletePosts } from "@/lib/firebase/posts/write";
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { toast } from "sonner";
+import { MoreVertical, Pencil, Trash2 } from "lucide-react";
+
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -12,15 +16,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import Link from "next/link";
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -28,255 +31,220 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogDescription,
-  AlertDialogAction,
   AlertDialogCancel,
+  AlertDialogAction,
 } from "@/components/ui/alert-dialog";
-import { toast } from "sonner";
-import { MoreVertical } from "lucide-react";
 
-// ================= TABLE SKELETON =================
-function PostsTableSkeleton({ rows = 5 }) {
+/* ------------------ SKELETON ------------------ */
+function TableSkeleton({ rows }) {
   return (
-    <>
-      <div className="overflow-y-scroll max-h-96 scrollbar-hide">
-        <Table className="border rounded-md">
-          <TableHeader>
-            <TableRow>
-              <TableHead>
-                <Skeleton className="h-4 w-6" />
-              </TableHead>
-              <TableHead>
-                <Skeleton className="h-4 w-16" />
-              </TableHead>
-              <TableHead>
-                <Skeleton className="h-4 w-24" />
-              </TableHead>
-              <TableHead>
-                <Skeleton className="h-4 w-24" />
-              </TableHead>
-              <TableHead>
-                <Skeleton className="h-4 w-16" />
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {Array.from({ length: rows }).map((_, i) => (
-              <TableRow key={i}>
-                <TableCell>
-                  <Skeleton className="h-4 w-6" />
-                </TableCell>
-
-                <TableCell>
-                  <Skeleton className="h-12 w-12 rounded-md mx-auto" />
-                </TableCell>
-
-                <TableCell>
-                  <Skeleton className="h-4 w-32" />
-                </TableCell>
-
-                <TableCell>
-                  <Skeleton className="h-4 w-36" />
-                </TableCell>
-
-                <TableCell>
-                  <div className="flex gap-2 justify-center">
-                    <Skeleton className="h-8 w-16 rounded-md" />
-                    <Skeleton className="h-8 w-16 rounded-md" />
-                  </div>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-
-      {/* Pagination Skeleton */}
-      <div className="flex justify-between mt-4">
-        <Skeleton className="h-8 w-20" />
-        <Skeleton className="h-8 w-32" />
-        <Skeleton className="h-8 w-20" />
-      </div>
-    </>
+    <div className="space-y-3">
+      {Array.from({ length: rows }).map((_, i) => (
+        <Skeleton key={i} className="h-16 rounded-xl" />
+      ))}
+    </div>
   );
 }
 
-// ================= MAIN COMPONENT =================
+/* ------------------ MAIN ------------------ */
 export default function PostsListview() {
   const { data, error, isLoading } = usePosts();
 
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(6);
   const [selectedPost, setSelectedPost] = useState(null);
-  const [openDialog, setOpenDialog] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  // Responsive pageSize
+  /* Responsive page size */
   useEffect(() => {
-    const handleResize = () => {
-      setPageSize(window.innerWidth >= 1024 ? 10 : 5);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const resize = () => setPageSize(window.innerWidth >= 1024 ? 10 : 6);
+    resize();
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
   }, []);
 
   if (!data && !isLoading) return null;
 
-  const totalPages = data ? Math.ceil(data.length / pageSize) : 1;
-  const startIndex = (page - 1) * pageSize;
-  const paginatedData = data
-    ? data.slice(startIndex, startIndex + pageSize)
-    : [];
+  const totalPages = Math.ceil((data?.length || 1) / pageSize);
+  const start = (page - 1) * pageSize;
+  const posts = data?.slice(start, start + pageSize) || [];
 
   const handleDelete = (post) => {
     setSelectedPost(post);
-    setOpenDialog(true);
+    setOpen(true);
   };
 
   const confirmDelete = async () => {
-    if (!selectedPost) return;
     try {
       await deletePosts(selectedPost);
-      toast.success("Post deleted successfully");
-      setOpenDialog(false);
+      toast.success("Post deleted");
+      setOpen(false);
       setSelectedPost(null);
-    } catch (err) {
-      toast.error(err.message || "Failed to delete post");
+    } catch (e) {
+      toast.error("Delete failed");
     }
   };
 
   return (
-    <Card className="w-full max-w-5xl mx-auto h-fit">
-      <CardHeader>
-        <CardTitle>Posts</CardTitle>
+    <Card className="max-w-6xl mx-auto rounded-3xl shadow-lg bg-background/80 backdrop-blur">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-xl font-semibold tracking-tight text-center mt-1 text-purple-700 dark:text-white">
+          Posts Management
+        </CardTitle>
       </CardHeader>
 
-      <CardContent>
-        {isLoading ? (
-          <PostsTableSkeleton rows={pageSize} />
-        ) : error ? (
-          <p className="text-red-500">{error}</p>
-        ) : (
-          <>
-            <div className="overflow-x-auto">
-              <Table className="border rounded-md min-w-full">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Sr</TableHead>
-                    <TableHead>Image</TableHead>
-                    <TableHead className="w-32">Title</TableHead>
-                    <TableHead className="w-32">Slug</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
+      <CardContent className="space-y-2">
+        {/* LOADING */}
+        {isLoading && <TableSkeleton rows={pageSize} />}
+        {/* ERROR */}
+        {error && <p className="text-red-500">{error}</p>}
+        {/* ================= DESKTOP TABLE ================= */}
+        {!isLoading && (
+          <div className="hidden md:block">
+            <Table className="border rounded-2xl overflow-hidden">
+              <TableHeader className="bg-muted/40">
+                <TableRow>
+                  <TableHead>SR</TableHead>
+                  <TableHead>Image</TableHead>
+                  <TableHead>Title</TableHead>
+                  <TableHead>Slug</TableHead>
+                  <TableHead className="text-center">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
 
-                <TableBody>
-                  {paginatedData.map((post, index) => (
-                    <TableRow key={post.id}>
-                      <TableCell>{startIndex + index + 1}</TableCell>
+              <TableBody>
+                {posts.map((post, i) => (
+                  <TableRow
+                    key={post.id}
+                    className="hover:bg-muted/40 transition"
+                  >
+                    <TableCell>{start + i + 1}</TableCell>
 
-                      <TableCell>
-                        <img
-                          src={post.iconURL || "/placeholder.png"}
-                          className="w-12 h-12 rounded-md mx-auto"
-                          alt={post.name}
-                        />
-                      </TableCell>
+                    <TableCell>
+                      <img
+                        src={post.iconURL || "/placeholder.png"}
+                        className="w-10 h-10 rounded-xl object-cover"
+                      />
+                    </TableCell>
 
-                      <TableCell className="truncate max-w-30">
-                        {post.name}
-                      </TableCell>
-                      <TableCell className="truncate max-w-30">
-                        {post.slug}
-                      </TableCell>
+                    <TableCell className="font-medium truncate max-w-[180px]">
+                      {post.name}
+                    </TableCell>
 
-                      <TableCell className="p-2 flex justify-center items-center">
-                        {/* Desktop */}
-                        <div className="hidden md:flex gap-2">
-                          <Link href={`/admin/posts/form?id=${post.id}`}>
-                            <Button size="sm" variant="outline">
-                              Edit
+                    <TableCell className="text-muted-foreground truncate max-w-[180px]">
+                      {post.slug}
+                    </TableCell>
+
+                    <TableCell>
+                      <div className="flex justify-center gap-2">
+                        <Link href={`/admin/posts/form?id=${post.id}`}>
+                          <Button size="icon" variant="outline">
+                            <Pencil className="w-4 h-4" />
+                          </Button>
+                        </Link>
+
+                        <AlertDialog
+                          open={open && selectedPost?.id === post.id}
+                          onOpenChange={setOpen}
+                        >
+                          <AlertDialogTrigger asChild>
+                            <Button
+                              size="icon"
+                              variant="destructive"
+                              onClick={() => handleDelete(post)}
+                            >
+                              <Trash2 className="w-4 h-4" />
                             </Button>
-                          </Link>
+                          </AlertDialogTrigger>
 
-                          <AlertDialog
-                            open={openDialog && selectedPost?.id === post.id}
-                            onOpenChange={setOpenDialog}
-                          >
-                            <AlertDialogTrigger asChild>
-                              <Button
-                                size="sm"
-                                variant="destructive"
-                                onClick={() => handleDelete(post)}
-                              >
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Delete Post</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                Delete "{post.name}" permanently?
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+
+                            <div className="flex justify-end gap-2 mt-4">
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction onClick={confirmDelete}>
                                 Delete
-                              </Button>
-                            </AlertDialogTrigger>
-
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>Delete Post</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                  Are you sure you want to delete "{post.name}"?
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-
-                              <div className="flex justify-end gap-2 mt-4">
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                <AlertDialogAction onClick={confirmDelete}>
-                                  Delete
-                                </AlertDialogAction>
-                              </div>
-                            </AlertDialogContent>
-                          </AlertDialog>
-                        </div>
-
-                        {/* Mobile */}
-                        <div className="md:hidden">
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <button className="p-2 rounded-md hover:bg-muted">
-                                <MoreVertical className="h-5 w-5" />
-                              </button>
-                            </DropdownMenuTrigger>
-
-                            <DropdownMenuContent align="end">
-                              <DropdownMenuItem asChild>
-                                <Link href={`/admin/posts/form?id=${post.id}`}>
-                                  Edit
-                                </Link>
-                              </DropdownMenuItem>
-
-                              <DropdownMenuItem
-                                className="text-red-600"
-                                onClick={() => handleDelete(post)}
-                              >
-                                Delete
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </>
+                              </AlertDialogAction>
+                            </div>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         )}
+        {/* ================= MOBILE CARDS ================= */}
+        <div className="md:hidden space-y-4">
+          {posts.map((post) => (
+            <Card
+              key={post.id}
+              className="rounded-2xl shadow-sm hover:shadow-md transition"
+            >
+              <CardContent className="p-2 flex gap-4 overflow-hidden text-wrap text-ellipsis">
+                <img
+                  src={post.iconURL || "/placeholder.png"}
+                  className="w-12  h-12   rounded-xl object-cover"
+                />
 
-        {/* Pagination */}
+                <div className="flex-1">
+                  <h3 className="font-semibold truncate text-ellipsis">
+                    {post.name}
+                  </h3>
+                  <p className="text-xs text-muted-foreground truncate text-ellipsis">
+                    {post.slug}
+                  </p>
+
+                  <div className="flex justify-end mt-3">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button size="icon" variant="ghost">
+                          <MoreVertical className="w-5 h-5" />
+                        </Button>
+                      </DropdownMenuTrigger>
+
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem asChild>
+                          <Link href={`/admin/posts/form?id=${post.id}`}>
+                            Edit
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          className="text-red-600"
+                          onClick={() => handleDelete(post)}
+                        >
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        {/* ================= PAGINATION ================= */}
+        {/* Pagination */}{" "}
         <div className="flex flex-row items-center justify-between gap-3 mt-4">
+          {" "}
           <Button
             size="sm"
             variant="default"
             disabled={page === 1}
             onClick={() => setPage((p) => Math.max(p - 1, 1))}
           >
-            Previous
-          </Button>
-
+            {" "}
+            Previous{" "}
+          </Button>{" "}
           <div className="flex flex-wrap gap-2 justify-center">
+            {" "}
             {Array.from({ length: totalPages }).map((_, i) => {
               const pageNumber = i + 1;
               return (
@@ -286,20 +254,21 @@ export default function PostsListview() {
                   variant={page === pageNumber ? "default" : "outline"}
                   onClick={() => setPage(pageNumber)}
                 >
-                  {pageNumber}
+                  {" "}
+                  {pageNumber}{" "}
                 </Button>
               );
-            })}
-          </div>
-
+            })}{" "}
+          </div>{" "}
           <Button
             size="sm"
             variant="default"
             disabled={page === totalPages}
             onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
           >
-            Next
-          </Button>
+            {" "}
+            Next{" "}
+          </Button>{" "}
         </div>
       </CardContent>
     </Card>

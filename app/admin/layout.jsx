@@ -5,26 +5,26 @@ import MobileSidebar from "./components/MobileSidebar";
 export default function Layout({ children }) {
   return (
     <AuthContextProvider>
-      <section className="min-h-screen flex dark:bg-gray-800 overflow-hidden ">
+      <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900">
         {/* Desktop Sidebar */}
-        <aside className="hidden md:block">
+        <aside className="hidden md:flex w-55 shrink-0 border-r bg-white dark:bg-gray-800">
           <Sidebar />
         </aside>
 
-        {/* Main Area */}
-        <div className="flex-1 flex flex-col">
-          {/* Mobile Topbar */}
-          <header className="md:hidden flex items-center gap-3 px-4 h-14 border-b bg-white dark:bg-gray-900">
+        {/* Right Side (Header + Content) */}
+        <div className="flex flex-col flex-1 min-w-0">
+          {/* Mobile Header */}
+          <header className="md:hidden sticky top-0 z-20 flex items-center gap-3 px-4 h-14 border-b bg-white dark:bg-gray-800">
             <MobileSidebar />
-            <h1 className="text-lg font-semibold">Admin Panel</h1>
+            <h1 className="text-lg font-semibold text-gray-800 dark:text-white">
+              Admin Panel
+            </h1>
           </header>
 
           {/* Page Content */}
-          <main className="flex-1 px-2 py-2 w-full overflow-hidden ">
-            {children}
-          </main>
+          <main className="flex-1 overflow-y-auto p-1 md:p-3">{children}</main>
         </div>
-      </section>
+      </div>
     </AuthContextProvider>
   );
 }

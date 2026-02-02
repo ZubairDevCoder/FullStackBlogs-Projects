@@ -15,20 +15,35 @@ import {
   sendPasswordResetEmail,
   updateProfile,
 } from "firebase/auth";
-import { FaGoogle, FaFacebook, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+
+// Shadcn UI Dialog
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function AuthTabs() {
   const [activeTab, setActiveTab] = useState("signin");
   const [showPassword, setShowPassword] = useState(false);
 
-  const signupForm = useForm();
+  const [isResetSubmitting, setIsResetSubmitting] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   const signinForm = useForm();
-
+  const signupForm = useForm();
   const router = useRouter();
-  const togglePassword = () => setShowPassword((prev) => !prev);
 
+  const togglePassword = () => setShowPassword((p) => !p);
+
+  /* ================= COMMON UI ================= */
   const ErrorLabel = ({ message }) => (
     <p className="text-red-500 text-sm">{message}</p>
   );
@@ -41,8 +56,8 @@ export default function AuthTabs() {
         {...registerObj}
       />
       <span
-        className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
         onClick={togglePassword}
+        className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
       >
         {showPassword ? <FaEyeSlash /> : <FaEye />}
       </span>
@@ -54,9 +69,9 @@ export default function AuthTabs() {
     <div className="space-y-3 mt-4">
       <Button
         type="button"
-        onClick={() => onClick(googleProvider)}
         variant="outline"
-        className="w-full flex items-center justify-center gap-2"
+        className="w-full"
+        onClick={() => onClick(googleProvider)}
       >
         <img src="/google.png" alt="google" width={20} /> Continue with Google
       </Button>
@@ -64,8 +79,8 @@ export default function AuthTabs() {
       <Button
         type="button"
         variant="outline"
+        className="w-full"
         onClick={() => onClick(facebookProvider)}
-        className="w-full flex items-center justify-center gap-2   "
       >
         <img src="/facebook.png" alt="google" width={20} /> Continue with
         Facebook
@@ -73,26 +88,31 @@ export default function AuthTabs() {
     </div>
   );
 
+  /* ================= HANDLERS ================= */
   const handleSignin = async (data) => {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      toast.success("Signin Successful! Welcome back.");
+      toast.success("Signin successful 🎉");
       signinForm.reset();
       router.push("/");
     } catch (err) {
-      toast.error(err.message);
+      toast.error("Invalid email or password");
     }
   };
 
   const handleSignup = async (data) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(
+      const res = await createUserWithEmailAndPassword(
         auth,
         data.email,
         data.password,
       );
-      await updateProfile(userCredential.user, { displayName: data.fullName });
-      toast.success(`Signup Successful! Welcome, ${data.fullName}`);
+
+      await updateProfile(res.user, {
+        displayName: data.fullName,
+      });
+
+      toast.success(`Welcome ${data.fullName} 🚀`);
       signupForm.reset();
       router.push("/");
     } catch (err) {
@@ -103,33 +123,41 @@ export default function AuthTabs() {
   const handleSocialLogin = async (provider) => {
     try {
       await signInWithPopup(auth, provider);
-      toast.success("Login Successful!");
+      toast.success("Login successful 🎉");
       router.push("/");
     } catch (err) {
       toast.error(err.message);
     }
   };
 
-  const handleForgotPassword = async (email) => {
-    if (!email) return toast.error("Please enter your email first");
+  const handlePasswordReset = async () => {
+    if (!resetEmail) {
+      toast.error("Please enter your email first");
+      return;
+    }
+
     try {
-      await sendPasswordResetEmail(auth, email);
-      toast.success("Password reset email sent!");
+      setIsResetSubmitting(true);
+      await sendPasswordResetEmail(auth, resetEmail);
+      toast.success("Password reset email sent! 📩");
+      setResetEmail("");
+      setDialogOpen(false);
     } catch (err) {
-      toast.error(err.message);
+      toast.error("Unable to send reset email");
+    } finally {
+      setIsResetSubmitting(false);
     }
   };
 
+  /* ================= UI ================= */
   return (
-    <div className="min-h-screen flex items-center justify-center  px-4">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-        {/* ==== TOP TEXT HOOK ==== */}
+        {/* Top Text */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-extrabold">
-            Build. Launch. Scale Your SaaS 🚀
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300 mt-2">
-            AI SaaS · Dev Tool · Agency · Blog Platform
+          <h1 className="text-3xl font-extrabold">Build. Launch. Scale 🚀</h1>
+          <p className="text-muted-foreground mt-2">
+            AI SaaS · Blog · Admin Panel
           </p>
         </div>
 
@@ -141,14 +169,15 @@ export default function AuthTabs() {
 
           {/* ================= SIGN IN ================= */}
           <TabsContent value="signin">
-            <Card className="shadow-xl">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-center">Welcome Back 👋</CardTitle>
               </CardHeader>
-              <CardContent>
+
+              <CardContent className="px-4 py-2">
                 <form
                   onSubmit={signinForm.handleSubmit(handleSignin)}
-                  className="space-y-3"
+                  className="space-y-1.5"
                 >
                   <Label>Email</Label>
                   <Input
@@ -170,21 +199,55 @@ export default function AuthTabs() {
                     }),
                     signinForm.formState.errors.password,
                   )}
-                  <Button type="submit" className="w-full mt-2">
+
+                  <Button type="submit" className="w-full my-2">
                     {signinForm.formState.isSubmitting
                       ? "Signing in..."
                       : "Sign In"}
                   </Button>
-                  <div className="text-center text-sm mt-1">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        handleForgotPassword(signinForm.getValues("email"))
-                      }
-                      className="text-blue-600 hover:underline cursor-pointer"
-                    >
-                      Forgot Password?
-                    </button>
+
+                  <div className="text-center text-sm flex justify-between mt-1">
+                    {/* Forgot Password Dialog */}
+                    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                      <DialogTrigger asChild>
+                        <p className="text-blue-600 hover:underline text-center cursor-pointer w-full ">
+                          Forgot Password?
+                        </p>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-sm">
+                        <DialogHeader>
+                          <DialogTitle>Password Reset</DialogTitle>
+                          <DialogDescription>
+                            Enter your email and we’ll send you a reset link.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="mt-2 space-y-2">
+                          <Input
+                            placeholder="Email"
+                            type="email"
+                            value={resetEmail}
+                            onChange={(e) => setResetEmail(e.target.value)}
+                          />
+                          <Button
+                            className="w-full"
+                            onClick={handlePasswordReset}
+                            disabled={isResetSubmitting}
+                          >
+                            {isResetSubmitting
+                              ? "Sending..."
+                              : "Send Reset Email"}
+                          </Button>
+                          <Button
+                            className="w-full"
+                            variant="ghost"
+                            onClick={() => setDialogOpen(false)}
+                            disabled={isResetSubmitting}
+                          >
+                            Cancel
+                          </Button>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
 
                   <SocialButtons onClick={handleSocialLogin} />
@@ -195,22 +258,21 @@ export default function AuthTabs() {
 
           {/* ================= SIGN UP ================= */}
           <TabsContent value="signup">
-            <Card className="shadow-xl">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-center">
-                  Create Free Account ✨
-                </CardTitle>
+                <CardTitle className="text-center">Create Account ✨</CardTitle>
               </CardHeader>
-              <CardContent>
+
+              <CardContent className="px-4 py-2">
                 <form
                   onSubmit={signupForm.handleSubmit(handleSignup)}
-                  className="space-y-3"
+                  className="space-y-1.5"
                 >
                   <Label>Full Name</Label>
                   <Input
                     placeholder="Full Name"
                     {...signupForm.register("fullName", {
-                      required: "Full Name is required",
+                      required: "Full name is required",
                     })}
                   />
 
@@ -230,22 +292,23 @@ export default function AuthTabs() {
                     signupForm.formState.errors.password,
                   )}
 
-                  <Button type="submit" className="w-full mt-2">
+                  <Button type="submit" className="w-full my-2">
                     {signupForm.formState.isSubmitting
                       ? "Creating..."
                       : "Sign Up"}
                   </Button>
-                  <div className="text-center text-sm mt-1">
+
+                  <div className="text-center text-sm mt-2">
+                    Already have an account?{" "}
                     <button
                       type="button"
-                      onClick={() =>
-                        handleForgotPassword(signinForm.getValues("email"))
-                      }
-                      className="text-blue-600 hover:underline cursor-pointer"
+                      className="text-blue-600 hover:underline"
+                      onClick={() => setActiveTab("signin")}
                     >
-                      Forgot Password?
+                      Sign In
                     </button>
                   </div>
+
                   <SocialButtons onClick={handleSocialLogin} />
                 </form>
               </CardContent>

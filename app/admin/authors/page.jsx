@@ -6,7 +6,7 @@ import AuthorsListview from "./components/AuthorsListview";
 export default function Page() {
   return (
     <>
-      <main className=" px-3 py-2 w-full mx-auto overflow-hidden">
+      <main className=" px-1 py-2 w-full mx-auto overflow-hidden">
         <div className="flex items-center justify-between">
           <h1 className="font-bold text-xl">Authors</h1>
           <Link href={`/admin/authors/form`}>

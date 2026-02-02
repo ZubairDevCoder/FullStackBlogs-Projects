@@ -145,7 +145,9 @@ export default function AuthorsListview() {
   return (
     <Card className="w-full  mx-auto overflow-hidden h-fit">
       <CardHeader>
-        <CardTitle>Authors</CardTitle>
+        <CardTitle className="text-xl font-semibold tracking-tight text-center mt-1 text-purple-700 dark:text-white">
+          Authors Management
+        </CardTitle>
       </CardHeader>
 
       <CardContent>

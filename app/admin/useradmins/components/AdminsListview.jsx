@@ -146,7 +146,9 @@ export default function AdminsListview() {
   return (
     <Card className="w-full max-w-5xl mx-auto overflow-hidden h-fit">
       <CardHeader>
-        <CardTitle>Admins</CardTitle>
+        <CardTitle className="text-xl font-semibold tracking-tight text-center mt-1 text-purple-700 dark:text-white">
+          Admins Management
+        </CardTitle>
       </CardHeader>
 
       <CardContent>
@@ -179,8 +181,12 @@ export default function AdminsListview() {
                       />
                     </TableCell>
 
-                    <TableCell className="md:w-auto w-2 text-ellipsis">{cat.name}</TableCell>
-                    <TableCell className="md:w-auto w-5 text-ellipsis">{cat.email}</TableCell>
+                    <TableCell className="md:w-auto w-2 text-ellipsis">
+                      {cat.name}
+                    </TableCell>
+                    <TableCell className="md:w-auto w-5 text-ellipsis">
+                      {cat.email}
+                    </TableCell>
 
                     <TableCell className="p-2 flex justify-center items-center">
                       {/* Desktop (md and up) */}

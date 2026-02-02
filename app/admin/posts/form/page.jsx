@@ -138,9 +138,11 @@ function PostsForm({ postId }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{postId ? "Edit Post" : "Create New Post"}</CardTitle>
+        <CardTitle className="text-xl font-semibold tracking-tight text-center mt-1 text-purple-700 dark:text-white">
+          {postId ? "Edit Post" : "Create New Post"}
+        </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col gap-4 lg:flex-row w-full">
+      <CardContent className="flex flex-col gap-4 lg:flex-row w-full px-4">
         <div className="flex-1">
           <form
             onSubmit={handleSubmit(submitHandler)}
@@ -262,7 +264,6 @@ export default async function Page({ searchParams }) {
   // 🔹 unwrap searchParams
   const params = await searchParams;
   const postId = params?.id || null;
-hy
   return (
     <PostsFormContextProvider>
       <PostsForm postId={postId} />

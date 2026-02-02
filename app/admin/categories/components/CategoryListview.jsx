@@ -145,7 +145,9 @@ export default function CategoryListview() {
   return (
     <Card className="w-full max-w-5xl mx-auto h-fit">
       <CardHeader>
-        <CardTitle>Categories</CardTitle>
+        <CardTitle className="text-xl font-semibold tracking-tight text-center mt-1 text-purple-700 dark:text-white">
+          Categories Management
+        </CardTitle>
       </CardHeader>
 
       <CardContent>

@@ -100,12 +100,14 @@ function AuthorsFormContent({ authorId }) {
   };
 
   return (
-    <Card className="w-full mx-4 my-4 h-fit overflow-hidden">
+    <Card className="w-full  my-4 h-fit overflow-hidden">
       <CardHeader>
-        <CardTitle>{authorId ? "Edit Author" : "Create Author"}</CardTitle>
+        <CardTitle className="text-xl font-semibold tracking-tight text-center mt-1 text-purple-700 dark:text-white">
+          {authorId ? "Edit Author" : "Create Author"}
+        </CardTitle>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="px-4">
         <form onSubmit={handleSubmit(submitHandler)} className="space-y-4">
           {/* Full Name */}
           <div>
