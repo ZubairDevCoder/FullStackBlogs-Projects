@@ -222,6 +222,7 @@ export default function AuthTabs() {
                           </DialogDescription>
                         </DialogHeader>
                         <div className="mt-2 space-y-2">
+                          <Label>Password</Label>
                           <Input
                             placeholder="Email"
                             type="email"
@@ -229,7 +230,7 @@ export default function AuthTabs() {
                             onChange={(e) => setResetEmail(e.target.value)}
                           />
                           <Button
-                            className="w-full"
+                            className="w-full my-2"
                             onClick={handlePasswordReset}
                             disabled={isResetSubmitting}
                           >
