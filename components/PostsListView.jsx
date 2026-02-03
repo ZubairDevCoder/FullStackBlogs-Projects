@@ -1,15 +1,47 @@
+"use client";
+
 import Link from "next/link";
-import { getAllPosts } from "@/lib/firebase/posts/read_server";
-import { getAllAuthors } from "@/lib/firebase/authors/read_server";
-import { getAllCategory } from "@/lib/firebase/category/read_server";
+import { useEffect, useState } from "react";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { User, Tag, Calendar } from "lucide-react";
 import Image from "next/image";
-export default async function AllPost({ posts: providedPosts }) {
-  const posts = providedPosts || (await getAllPosts());
-  const authors = await getAllAuthors();
-  const categories = await getAllCategory();
+
+export default function AllPost() {
+  const [posts, setPosts] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // 🔥 Realtime listener for posts
+  useEffect(() => {
+    const unsubscribePosts = onSnapshot(collection(db, "posts"), (snap) => {
+      const data = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setPosts(data);
+    });
+
+    const unsubscribeAuthors = onSnapshot(collection(db, "authors"), (snap) => {
+      const data = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setAuthors(data);
+    });
+
+    const unsubscribeCategories = onSnapshot(
+      collection(db, "categories"),
+      (snap) => {
+        const data = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        setCategories(data);
+        setLoading(false);
+      },
+    );
+
+    return () => {
+      unsubscribePosts();
+      unsubscribeAuthors();
+      unsubscribeCategories();
+    };
+  }, []);
 
   const authorsMap = authors.reduce((acc, author) => {
     acc[author.id] = author;
@@ -20,6 +52,10 @@ export default async function AllPost({ posts: providedPosts }) {
     acc[cat.id] = cat;
     return acc;
   }, {});
+
+  if (loading) {
+    return <div className="text-center py-20 text-gray-500">Loading...</div>;
+  }
 
   if (!posts || posts.length === 0) {
     return (
