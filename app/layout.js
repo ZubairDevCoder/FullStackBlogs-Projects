@@ -5,45 +5,11 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { ModeToggle } from "@/components/darkMode";
 
-
 export const metadata = {
   title:
     "ZubairDevCoder Blog | Full Stack Development, React, Next.js & Modern UI",
   description:
     "ZubairDevCoder Blog – Learn Full Stack Web Development, React, Next.js, Firebase, Shadcn UI, Tailwind CSS, Figma, Postman, and Modern UI/UX Design. Step-by-step coding tutorials, SEO-friendly tips, and practical projects for developers.",
-  keywords: [
-    "ZubairDevCoder",
-    "Full Stack Development",
-    "React JS",
-    "Next.js",
-    "Firebase",
-    "Shadcn UI",
-    "Tailwind CSS",
-    "Figma",
-    "Postman",
-    "Modern UI Design",
-    "Web Development Tutorials",
-    "Coding Projects",
-    "SEO-friendly web apps",
-  ],
-  authors: [{ name: "ZubairDevCoder" }],
-  openGraph: {
-    title: "ZubairDevCoder Blog | Full Stack Development, React, Next.js",
-    description:
-      "Step-by-step coding tutorials, projects, and modern UI design tips by ZubairDevCoder. Learn React, Next.js, Firebase, Tailwind, Shadcn UI, and build SEO-friendly apps.",
-    metadataBase: new URL("https://full-stack-blogs-projects.vercel.app"),
-    url: "https://full-stack-blogs-projects.vercel.app/", // replace with your live site
-    siteName: "ZubairDevCoder Blog",
-    images: [
-      {
-        url: "/og-image.png", // create an OG image
-        width: 1200,
-        height: 630,
-        alt: "ZubairDevCoder Blog - Full Stack Development",
-      },
-    ],
-    type: "website",
-  },
 };
 
 export default function RootLayout({ children }) {

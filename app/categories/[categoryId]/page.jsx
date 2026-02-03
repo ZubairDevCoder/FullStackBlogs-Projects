@@ -70,11 +70,7 @@ export default async function Page({ params }) {
           </h2>
         </div>
       ) : (
-        <div className="grid gap-6">
-          {posts.map((post) => (
-            <AllPost key={post.id} post={post} />
-          ))}
-        </div>
+        <AllPost posts={posts} />
       )}
     </main>
   );

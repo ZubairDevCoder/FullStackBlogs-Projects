@@ -42,7 +42,7 @@ export default function Hero() {
       <div className="relative mt-12 flex flex-wrap justify-center gap-6">
         {/* Primary CTA */}
         <Link
-          href="/account"
+          href="/contact"
           className="group relative px-9 py-4 rounded-2xl font-semibold text-white
     bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600
     shadow-xl hover:shadow-2xl transition-all duration-300
@@ -53,7 +53,7 @@ export default function Hero() {
       group-hover:opacity-100 transition"
           />
           <span className="relative flex items-center gap-2">
-            🚀 Start Free Trial
+            🚀 Contact us
             <span className="group-hover:translate-x-1 transition">→</span>
           </span>
         </Link>

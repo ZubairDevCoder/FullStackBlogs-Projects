@@ -100,7 +100,7 @@ export default function PostsListview() {
         {error && <p className="text-red-500">{error}</p>}
         {/* ================= DESKTOP TABLE ================= */}
         {!isLoading && (
-          <div className="hidden md:block">
+          <div >
             <Table className="border rounded-2xl overflow-hidden">
               <TableHeader className="bg-muted/40">
                 <TableRow>
@@ -181,56 +181,6 @@ export default function PostsListview() {
             </Table>
           </div>
         )}
-        {/* ================= MOBILE CARDS ================= */}
-        <div className="md:hidden space-y-4">
-          {posts.map((post) => (
-            <Card
-              key={post.id}
-              className="rounded-2xl shadow-sm hover:shadow-md transition"
-            >
-              <CardContent className="p-2 flex gap-4 overflow-hidden text-wrap text-ellipsis">
-                <img
-                  src={post.iconURL || "/placeholder.png"}
-                  className="w-12  h-12   rounded-xl object-cover"
-                />
-
-                <div className="flex-1">
-                  <h3 className="font-semibold truncate text-ellipsis">
-                    {post.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground truncate text-ellipsis">
-                    {post.slug}
-                  </p>
-
-                  <div className="flex justify-end mt-3">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button size="icon" variant="ghost">
-                          <MoreVertical className="w-5 h-5" />
-                        </Button>
-                      </DropdownMenuTrigger>
-
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem asChild>
-                          <Link href={`/admin/posts/form?id=${post.id}`}>
-                            Edit
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="text-red-600"
-                          onClick={() => handleDelete(post)}
-                        >
-                          Delete
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        {/* ================= PAGINATION ================= */}
         {/* Pagination */}{" "}
         <div className="flex flex-row items-center justify-between gap-3 mt-4">
           {" "}

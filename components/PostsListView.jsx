@@ -6,8 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { User, Tag, Calendar } from "lucide-react";
 import Image from "next/image";
-export default async function AllPost() {
-  const posts = await getAllPosts();
+export default async function AllPost({ posts: providedPosts }) {
+  const posts = providedPosts || (await getAllPosts());
   const authors = await getAllAuthors();
   const categories = await getAllCategory();
 
