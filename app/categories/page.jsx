@@ -97,14 +97,7 @@ export default async function Page() {
           Start building AI tools, SaaS platforms & paid products today.
         </p>
 
-        <Link
-          href="/account"
-          className="inline-flex items-center gap-2 mt-8 px-10 py-4 rounded-2xl
-          bg-gradient-to-r from-blue-600 to-purple-600
-          text-white font-semibold shadow-lg hover:scale-105 transition"
-        >
-          🚀 Start Free Trial →
-        </Link>
+        
       </section>
 
       {/* ================= ANIMATIONS ================= */}

@@ -23,24 +23,24 @@ export default function Page() {
           </span>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight font-montserrat">
             <span className="block text-gray-800 dark:text-gray-100">
               Build Skills That Matter
             </span>
-            <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent text-3xl ">
+            <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent text-3xl font-poppins ">
               Learn <TypedCategories />
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-inter">
             High-quality tutorials, real-world projects, and career-focused
             content for developers who want to build production-ready
             applications.
           </p>
 
           {/* CTA Highlights */}
-          <div className="flex flex-wrap justify-center gap-4 mt-4">
+          <div className="flex flex-wrap justify-center gap-4 mt-4 font-roboto">
             <span className="px-5 py-2 rounded-full bg-blue-600 text-white font-medium shadow">
               🚀 Real Projects
             </span>
@@ -59,11 +59,11 @@ export default function Page() {
 
       {/* ================= TOP TOPICS ================= */}
       <section>
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-14 text-gray-800 dark:text-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-14 text-gray-800 dark:text-white font-opensans">
           High-Demand Topics You’ll Master
         </h2>
 
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1  gap-8">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1  gap-8 font-poppins">
           {[
             {
               title: "🚀 Full-Stack Web Development",

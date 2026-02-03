@@ -171,7 +171,9 @@ export default function AuthTabs() {
           <TabsContent value="signin">
             <Card>
               <CardHeader>
-                <CardTitle className="text-center">Welcome Back 👋</CardTitle>
+                <CardTitle className="text-center my-3">
+                  Welcome Back 👋
+                </CardTitle>
               </CardHeader>
 
               <CardContent className="px-4 py-2">
@@ -181,6 +183,7 @@ export default function AuthTabs() {
                 >
                   <Label>Email</Label>
                   <Input
+                    className="mb-4"
                     placeholder="Email"
                     {...signinForm.register("email", {
                       required: "Email is required",
@@ -261,7 +264,9 @@ export default function AuthTabs() {
           <TabsContent value="signup">
             <Card>
               <CardHeader>
-                <CardTitle className="text-center">Create Account ✨</CardTitle>
+                <CardTitle className="text-center my-2">
+                  Create Account ✨
+                </CardTitle>
               </CardHeader>
 
               <CardContent className="px-4 py-2">
@@ -271,6 +276,7 @@ export default function AuthTabs() {
                 >
                   <Label>Full Name</Label>
                   <Input
+                    className="mb-4"
                     placeholder="Full Name"
                     {...signupForm.register("fullName", {
                       required: "Full name is required",
@@ -279,6 +285,7 @@ export default function AuthTabs() {
 
                   <Label>Email</Label>
                   <Input
+                    className="mb-4"
                     placeholder="Email"
                     {...signupForm.register("email", {
                       required: "Email is required",

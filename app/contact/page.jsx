@@ -81,7 +81,7 @@ export default function Page() {
           border border-gray-200/50 dark:border-gray-800
           shadow-xl animate-fadeUp"
         >
-          <CardHeader>
+          <CardHeader className="my-2">
             <CardTitle className="text-2xl font-bold text-center">
               Contact Our Team
             </CardTitle>
@@ -90,8 +90,11 @@ export default function Page() {
             </p>
           </CardHeader>
 
-          <CardContent>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <CardContent className="px-4 py-2">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-5 px-4 py-2"
+            >
               {/* Full Name */}
               <div className="space-y-1">
                 <Label>Full Name</Label>

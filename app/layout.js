@@ -1,4 +1,3 @@
-
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -32,6 +31,7 @@ export const metadata = {
     title: "ZubairDevCoder Blog | Full Stack Development, React, Next.js",
     description:
       "Step-by-step coding tutorials, projects, and modern UI design tips by ZubairDevCoder. Learn React, Next.js, Firebase, Tailwind, Shadcn UI, and build SEO-friendly apps.",
+    metadataBase: new URL("https://full-stack-blogs-projects.vercel.app"),
     url: "https://full-stack-blogs-projects.vercel.app/", // replace with your live site
     siteName: "ZubairDevCoder Blog",
     images: [
@@ -44,21 +44,17 @@ export const metadata = {
     ],
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "ZubairDevCoder Blog | Full Stack Development, React, Next.js",
-    description:
-      "Learn Full Stack Development, React, Next.js, Firebase, Tailwind CSS, and Modern UI Design with ZubairDevCoder.",
-    images: ["/og-image.png"], // same OG image
-    creator: "@ZubairDevCoder",
-  },
 };
-
-
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="antialiased dark:bg-gray-800 scrollbar-hide overflow-y-scroll">
         <ThemeProvider
           attribute="class"
