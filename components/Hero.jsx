@@ -10,13 +10,13 @@ export default function Hero() {
       {/* TOP MINI TITLE */}
       <h2
         className="relative mb-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
-        bg-clip-text text-transparent text-3xl font-bold "
+        bg-clip-text text-transparent text-2xl font-bold "
       >
         Welcome to Blog <br className="md:hidden block" /> <TypedCategories />
       </h2>
 
       {/* MAIN TITLE */}
-      <h1 className="relative text-4xl md:text-6xl font-extrabold tracking-tight">
+      <h1 className="relative text-3xl md:text-6xl font-bold tracking-tight">
         Build & Scale Your <br />
         <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
           SaaS Product Faster

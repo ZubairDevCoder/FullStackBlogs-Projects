@@ -94,7 +94,8 @@ export default function AllPost() {
                 src={post.iconURL}
                 alt={post.name}
                 fill
-                className="object-cover"
+                loading="lazy"
+                className="object-contain"
               />
             </div>
 

@@ -38,7 +38,7 @@ export default async function Page() {
 
       {/* ================= CATEGORY GRID ================= */}
       <section className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
           {categories.map((category, index) => (
             <Link
               key={category.id}
@@ -51,7 +51,7 @@ export default async function Page() {
                 border border-gray-200/50 dark:border-gray-800
                 shadow-md hover:shadow-xl
                 transition-all duration-300
-                hover:-translate-y-2 hover:border-purple-500"
+                hover:-translate-y-2 hover:border-purple-500 text-center"
                 style={{
                   animation: `fadeUp 0.6s ease forwards`,
                   animationDelay: `${index * 0.05}s`,
@@ -96,8 +96,6 @@ export default async function Page() {
         <p className="mt-4 text-gray-600 dark:text-gray-400">
           Start building AI tools, SaaS platforms & paid products today.
         </p>
-
-        
       </section>
 
       {/* ================= ANIMATIONS ================= */}

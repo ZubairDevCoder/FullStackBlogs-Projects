@@ -43,7 +43,7 @@ export default function AllCategory() {
       {loading ? (
         <div className="text-center text-gray-500">Loading...</div>
       ) : (
-        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
           {categories.map((category, index) => (
             <Link
               key={category.id}
@@ -56,7 +56,7 @@ export default function AllCategory() {
                   border border-gray-200/50 dark:border-gray-800
                   shadow-md hover:shadow-xl
                   transition-all duration-300
-                  hover:-translate-y-2 hover:border-purple-500"
+                  hover:-translate-y-2 hover:border-purple-500 text-center"
                 style={{
                   animation: `fadeUp 0.6s ease forwards`,
                   animationDelay: `${index * 0.05}s`,
@@ -73,6 +73,7 @@ export default function AllCategory() {
                     src={category.iconURL}
                     alt={category.name}
                     fill
+                    loading="lazy"
                     className="object-contain p-3"
                   />
                 </div>

@@ -4,7 +4,8 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { ModeToggle } from "@/components/darkMode";
-
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 export const metadata = {
   title:
     "ZubairDevCoder Blog | Full Stack Development, React, Next.js & Modern UI",
@@ -21,7 +22,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased dark:bg-gray-800 scrollbar-hide overflow-y-scroll">
+      <body className="antialiased dark:bg-gray-800 scrollbar-hide overflow-y-scroll overflow-hidden">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -31,8 +32,11 @@ export default function RootLayout({ children }) {
           <header className="sticky top-0 z-50  shadow-lg bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-800 mb-5 ">
             <Navbar />
           </header>
+
           <main className="max-w-7xl mx-auto scrollbar-hide overflow-hidden ">
             {children}
+            <Analytics />
+            <SpeedInsights />
           </main>
           {/* Dark/Light Toggle */}
           <div className="fixed bottom-6 right-6 z-50 ">
