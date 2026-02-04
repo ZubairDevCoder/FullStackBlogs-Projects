@@ -69,6 +69,7 @@ export default async function Page() {
                     src={category.iconURL}
                     alt={category.name}
                     fill
+                    loading="lazy"
                     className="object-contain p-3"
                   />
                 </div>

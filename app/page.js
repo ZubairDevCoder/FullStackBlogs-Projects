@@ -1,7 +1,7 @@
-import AllPost from "@/components/PostsListView";
-import AllCategory from "@/components/Allcategoires";
 import TypedCategories from "@/components/TopCategories";
 import Hero from "@/components/Hero";
+import AllCategoryCom from "@/components/AllCategoryCom";
+import AllPostsHome from "@/components/AllPostsHome";
 
 export default function Page() {
   return (
@@ -106,7 +106,7 @@ export default function Page() {
       </section>
       {/* ================= CATEGORIES ================= */}
       <section>
-        <AllCategory />
+        <AllCategoryCom />
       </section>
       {/* ================= POSTS ================= */}
       <section>
@@ -116,7 +116,7 @@ export default function Page() {
         <p className="text-center text-gray-600 mb-8">
           Practical guides written with real development experience.
         </p>
-        <AllPost />
+        <AllPostsHome />
       </section>
 
       {/* ================= FINAL HOOK + EXTRA TOPICS ================= */}

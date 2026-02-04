@@ -80,7 +80,8 @@ export default async function Page({ params }) {
             src={post.iconURL}
             alt={post.name}
             fill
-            className="object-cover"
+            loading="lazy"
+            className="object-contain rounded-xl"
           />
         )}
       </div>
