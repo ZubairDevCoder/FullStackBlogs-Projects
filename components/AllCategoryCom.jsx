@@ -11,7 +11,7 @@ export default function AllCategoryCom() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const q = query(collection(db, "categories"), limit(8));
+    const q = query(collection(db, "categories"), limit(6));
     const unsubscribe = onSnapshot(
       q,
       (snap) => {
@@ -42,6 +42,15 @@ export default function AllCategoryCom() {
 
   return (
     <section className="py-20 px-6">
+      <h2 className="text-3xl md:text-4xl font-bold text-center">
+        <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          Explore Categories
+        </span>
+      </h2>
+      <p className="my-3 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-center ">
+        AI SaaS, Dev Tools, Agency platforms & Blog systems — everything you
+        need to build, scale, and monetize.
+      </p>
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
         {categories.map((cat) => (
           <Link key={cat.id} href={`/categories/${cat.id}`} className="group">

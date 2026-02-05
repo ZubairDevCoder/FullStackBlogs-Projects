@@ -29,17 +29,19 @@ export default async function Page({ params }) {
                   Tutorials & Guides
                 </span>
               </h1>
+              <div className="flex items-center md:gap-5 gap-2   flex-col md:flex-row md:flex-nowrap">
+                {/* Subhook with typed animation */}
+                <h2 className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 flex-shrink-0">
+                  Discover Coding Topics
+                </h2>
 
-              {/* Subhook with typed animation */}
-              <h2 className="text-xl md:text-2xl text-gray-700 dark:text-gray-300">
-                Discover Coding Topics{" "}
                 <TypedCategories
-                  className="text-blue-500 font-semibold"
+                  className="text-blue-500 font-semibold flex-1 min-w-0"
                   loop
                   typeSpeed={80}
                   backSpeed={50}
                 />
-              </h2>
+              </div>
 
               {/* Small descriptive teaser */}
               <p className="text-gray-600 dark:text-gray-300 text-lg">

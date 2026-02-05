@@ -7,17 +7,24 @@ export default async function Page() {
   const categories = await getAllCategory();
 
   return (
-    <main className="relative min-h-screen px-6 py-20 bg-white dark:bg-black text-gray-900 dark:text-white">
+    <main className="relative min-h-screen px-6 py-10 bg-white dark:bg-black text-gray-900 dark:text-white">
       {/* ================= HERO / HOOK ================= */}
-      <section className="text-center max-w-4xl mx-auto mb-20">
-        <h1 className="text-4xl  font-bold leading-tight">
-          <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+      <section className="text-center max-w-4xl mx-auto mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold my-3 ">
+          Explore Categories
+        </h2>
+        <h1 className="text-4xl font-bold leading-tight text-center">
+          <span className="block bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-2">
             High-Demand SaaS Categories
           </span>
-          <br />
-          <TypedCategories />
-          <br />
-          Built for Growth & Revenue
+
+          <div className="my-3">
+            <TypedCategories />
+          </div>
+
+          <span className="block mt-2 text-gray-700 dark:text-gray-300">
+            Built for Growth & Revenue
+          </span>
         </h1>
 
         <p className="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-300">
@@ -87,16 +94,6 @@ export default async function Page() {
             </Link>
           ))}
         </div>
-      </section>
-
-      {/* ================= CTA ================= */}
-      <section className="mt-24 text-center">
-        <h2 className="text-3xl md:text-4xl font-extrabold">
-          Turn Categories into Revenue-Generating Products
-        </h2>
-        <p className="mt-4 text-gray-600 dark:text-gray-400">
-          Start building AI tools, SaaS platforms & paid products today.
-        </p>
       </section>
 
       {/* ================= ANIMATIONS ================= */}

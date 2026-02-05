@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import 'tailwind-scrollbar-hide/v4';
+@import "tailwind-scrollbar-hide/v4";
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -52,7 +52,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(63.446% 0.28477 330.045 / 0.896);
+  --primary: oklch(63.446% 0.28477 330.045 / 0.973);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -122,43 +122,46 @@
   }
 }
 
-
 :root {
-  --font-inter: 'Inter', sans-serif;
-  --font-poppins: 'Poppins', sans-serif;
-  --font-montserrat: 'Montserrat', sans-serif;
-  --font-open-sans: 'Open Sans', sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-open-sans: "Open Sans", sans-serif;
 }
 
 /* 📝 Base font for body */
 body {
   font-family: var(--font-inter);
   line-height: 1.6;
-  color: var(--foreground, #000);
-  background-color: var(--background, #fff);
 }
 
 /* 🌟 Headings */
-h1, h2 {
+h1,
+h2 {
   font-family: var(--font-montserrat);
   font-weight: 700;
   line-height: 1.2;
 }
 
-h3, h4 {
+h3,
+h4 {
   font-family: var(--font-poppins);
   font-weight: 600;
   line-height: 1.3;
 }
 
-h5, h6 {
+h5,
+h6 {
   font-family: var(--font-open-sans);
   font-weight: 600;
   line-height: 1.4;
 }
 
 /* 🖊 Text content */
-p, span, li, a {
+p,
+span,
+li,
+a {
   font-family: var(--font-inter);
   font-weight: 400;
 }
@@ -173,8 +176,9 @@ blockquote {
   margin: 1rem 0;
 }
 
-code, pre {
-  font-family: 'Fira Code', monospace;
+code,
+pre {
+  font-family: "Fira Code", monospace;
   font-size: 0.95rem;
   background-color: var(--muted, #f5f5f5);
   padding: 0.2rem 0.4rem;
@@ -183,19 +187,18 @@ code, pre {
 }
 
 /* 🌈 Buttons & Inputs */
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font-family: var(--font-inter);
   font-weight: 500;
 }
 
-
-
-
-
 /* 🌈 Custom scrollbar */
 /* 🔹 Tiny / hidden scrollbar */
 ::-webkit-scrollbar {
-  width: 2px;  /* vertical scrollbar width */
+  width: 2px; /* vertical scrollbar width */
   height: 2px; /* horizontal scrollbar height */
 }
 
@@ -206,7 +209,9 @@ button, input, textarea, select {
 ::-webkit-scrollbar-thumb {
   background: rgba(127, 0, 255, 0.5); /* semi-transparent thumb */
   border-radius: 10px;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {

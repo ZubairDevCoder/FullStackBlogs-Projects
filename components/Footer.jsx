@@ -49,7 +49,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-slate-900 text-gray-200 py-12 mt-1">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-5 gap-10">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-5 gap-10 overflow-hidden">
         {/* About */}
         <div className="col-span-1">
           <h3 className="text-lg font-semibold mb-4">About</h3>

@@ -230,7 +230,7 @@ function PostsForm({ postId }) {
               {(preview || existingImageURL) && (
                 <img
                   src={preview || existingImageURL}
-                  className="w-32 h-32 mt-2 rounded object-cover"
+                  className="w-32 h-32 mt-2 rounded object-contain"
                 />
               )}
             </div>

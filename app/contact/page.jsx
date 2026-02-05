@@ -45,7 +45,7 @@ export default function Page() {
   };
 
   return (
-    <main className="relative min-h-screen px-6 py-24 bg-white dark:bg-black text-gray-900 dark:text-white">
+    <main className="relative min-h-screen px-6 py-12 bg-white dark:bg-black text-gray-900 dark:text-white">
       {/* ================= BACKGROUND GLOW ================= */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-3xl" />
 

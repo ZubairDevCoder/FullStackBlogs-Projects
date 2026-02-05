@@ -12,9 +12,9 @@ export default function Layout({ children }) {
         </aside>
 
         {/* Right Side (Header + Content) */}
-        <div className="flex flex-col flex-1 min-w-0">
+        <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
           {/* Mobile Header */}
-          <header className="md:hidden sticky top-0 z-20 flex items-center gap-3 px-4 h-14 border-b bg-white dark:bg-gray-800">
+          <header className="md:hidden sticky top-0 z-20 flex items-center gap-3 px-4 h-14 border-b bg-white dark:bg-gray-800 overflow-hidden">
             <MobileSidebar />
             <h1 className="text-lg font-semibold text-gray-800 dark:text-white">
               Admin Panel
@@ -22,7 +22,7 @@ export default function Layout({ children }) {
           </header>
 
           {/* Page Content */}
-          <main className="flex-1 overflow-y-auto p-1 md:p-3">{children}</main>
+          <main className="flex-1 overflow-hidden p-1 md:p-3">{children}</main>
         </div>
       </div>
     </AuthContextProvider>

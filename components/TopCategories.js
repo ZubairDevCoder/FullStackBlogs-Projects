@@ -9,22 +9,16 @@ export default function TypedCategories() {
   useEffect(() => {
     const typed = new Typed(typedRef.current, {
       strings: [
-        "<strong>Frontend Developer</strong>",
-        "<strong>Backend Developer</strong>",
-        "<strong>Full Stack Developer</strong>",
-        "<strong>Web Developer</strong>",
-        "<strong>MERN Stack Developer</strong>",
-        "<strong>MEAN Stack Developer</strong>",
-        "<strong>JavaScript Developer</strong>",
-        "<strong>TypeScript Developer</strong>",
-        "<strong>React Developer</strong>",
-        "<strong>Next.js Developer</strong>",
-        "<strong>Node.js Developer</strong>",
-        "<strong>Express.js Developer</strong>",
-        "<strong>MongoDB Developer</strong>",
-        "<strong>Firebase Developer</strong>",
-        "<strong>REST API Developer</strong>",
+        "<strong>Full Stack Development</strong>",
         "<strong>Data Science</strong>",
+        "<strong>Machine Learning</strong>",
+        "<strong>Artificial Intelligence (AI)</strong>",
+        "<strong>Cyber Security</strong>",
+        "<strong>Cloud Computing</strong>",
+        "<strong>DevOps</strong>",
+        "<strong>Mobile App Development</strong>",
+        "<strong>Blockchain Development</strong>",
+        "<strong>Internet of Things (IoT)</strong>",
       ],
       typeSpeed: 60, // Typing speed
       backSpeed: 40, // Deleting speed

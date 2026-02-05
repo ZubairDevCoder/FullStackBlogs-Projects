@@ -22,14 +22,14 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased dark:bg-gray-800 scrollbar-hide overflow-y-scroll overflow-hidden">
+      <body className="antialiased dark:bg-gray-800 scrollbar-hide overflow-y-scroll overflow-hidden ">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <header className="sticky top-0 z-50  shadow-lg bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-800 mb-5 ">
+          <header className="sticky top-0 z-50  shadow-lg bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-800 mb-5 overflow-hidden">
             <Navbar />
           </header>
 
@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
             <SpeedInsights />
           </main>
           {/* Dark/Light Toggle */}
-          <div className="fixed bottom-6 right-6 z-50 ">
+          <div className="fixed bottom-6 right-6 z-50 overflow-hidden">
             <ModeToggle />
           </div>
           <Toaster position="top-center" />

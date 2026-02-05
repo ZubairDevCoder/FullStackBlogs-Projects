@@ -68,7 +68,7 @@ export default async function Page({ params }) {
   const updatedAt = post.updatedAt?.toDate?.();
 
   return (
-    <article className="max-w-3xl mx-auto px-4 py-5 space-y-6">
+    <article className="max-w-3xl mx-auto px-4 py-5 space-y-6 bg-white dark:bg-gray-800">
       <h1 className="md:text-4xl text-xl  text-purple-600 dark:text-white font-bold text-center">
         {post.name}
       </h1>

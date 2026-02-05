@@ -158,8 +158,9 @@ function CategoryFormContent({ categoryId }) {
                 <Image
                   src={preview}
                   fill
+                  loading="lazy"
                   alt="Category Image"
-                  className="object-cover rounded-md"
+                  className="object-contain rounded-md"
                 />
               </div>
             )}
