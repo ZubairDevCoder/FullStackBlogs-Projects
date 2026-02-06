@@ -177,7 +177,7 @@ export default function AdminsListview() {
                     <TableCell>
                       <img
                         src={cat.iconURL || "/placeholder.png"}
-                        className="w-12 h-12 rounded-md mx-auto"
+                        className="w-12 h-12 rounded-md mx-auto object-contain"
                       />
                     </TableCell>
 

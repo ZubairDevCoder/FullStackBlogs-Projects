@@ -9,6 +9,7 @@ import {
   MessageCircle,
   Menu,
   LayoutDashboard,
+  FileText,
 } from "lucide-react";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -23,6 +24,7 @@ import { doc, getDoc } from "firebase/firestore";
 // 🔹 COMMON LINKS (Dashboard excluded)
 const baseLinks = [
   { name: "Home", href: "/", icon: House },
+  { name: "Posts", href: "/allposts", icon: FileText },
   { name: "Categories", href: "/categories", icon: List },
   { name: "Contact", href: "/contact", icon: MessageCircle },
 ];
@@ -61,14 +63,14 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-1.5">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* LOGO */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center gap-2 ">
           <Image
-            src="/Zub-Dev-Coder-logo.png"
-            alt="Zubi Coding Blogs Logo"
-            width={180}
-            height={5}
+            src="/codingblog.png"
+            alt="Coding Blog Logo"
+            width={70} // logo ki width
+            height={20} // navbar ke hisaab se height
             priority
-            className="  transition-transform duration-300 hover:scale-105 "
+            className=" object-contain transition-transform duration-300 hover:scale-105 dark:invert"
           />
         </Link>
 
@@ -149,11 +151,14 @@ export default function Navbar() {
               </SheetTrigger>
 
               <SheetContent side="left" className="bg-white dark:bg-gray-900">
-                <Link href="/" className="block ">
-                  <img
-                    src="/Zub-Dev-Coder-logo.png"
-                    alt="Zubi Coding Blogs Logo"
-                    className=" object-contain w-30"
+                <Link href="/" className="flex items-center gap-2 px-4 pt-1">
+                  <Image
+                    src="/codingblog.png"
+                    alt="Coding Blog Logo"
+                    width={70} // logo ki width
+                    height={20} // navbar ke hisaab se height
+                    priority
+                    className=" object-contain dark:invert"
                   />
                 </Link>
 

@@ -2,6 +2,9 @@ import TypedCategories from "@/components/TopCategories";
 import Hero from "@/components/Hero";
 import AllCategoryCom from "@/components/AllCategoryCom";
 import AllPostsHome from "@/components/AllPostsHome";
+import HomePostsByCategory from "@/components/HomePostsByCategory";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -23,12 +26,12 @@ export default function Page() {
           </span>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight font-montserrat">
+          <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tight font-montserrat">
             <span className="block text-gray-800 dark:text-gray-100">
               Build Skills That Matter
             </span>
             <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent text-3xl font-poppins ">
-              Learn <TypedCategories />
+              Learn <br className="block md:hidden" /> <TypedCategories />
             </span>
           </h1>
 
@@ -104,19 +107,37 @@ export default function Page() {
           ))}
         </div>
       </section>
+      {/* Courses */}
+      <section className="max-w-5xl mx-auto px-4   mt-8">
+        <h1 className="text-2xl  font-bold text-gray-800 dark:text-white mb-4 text-center">
+          Full Stack Development Roadmap & Course
+        </h1>
+        <p className="text-gray-600 dark:text-gray-300 text-center mb-6 leading-relaxed">
+          Explore this comprehensive full stack development course that covers
+          the complete roadmap: HTML, CSS, JavaScript, React, Next.js,Shadcn Ui,
+          Node.js, Express, MongoDB and Tailwind CSS. Start learning and
+          building professional web applications today.
+        </p>
+        <div className="flex justify-center">
+          <Link
+            href="https://www.youtube.com/playlist?list=PLu0W_9lII9agq5TrH9XLIKQvv0iaF2X3w"
+            target="_blank"
+            className="inline-block"
+          >
+            <Button className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl shadow-lg hover:scale-105 transform transition duration-300">
+              Full Stack Development Course
+            </Button>
+          </Link>
+        </div>
+      </section>
+
       {/* ================= CATEGORIES ================= */}
       <section>
         <AllCategoryCom />
       </section>
       {/* ================= POSTS ================= */}
       <section>
-        <h2 className="text-3xl font-bold text-center mb-4 text-purple-600 dark:text-white">
-          Featured Posts
-        </h2>
-        <p className="text-center text-gray-600 mb-8">
-          Practical guides written with real development experience.
-        </p>
-        <AllPostsHome />
+        <HomePostsByCategory />
       </section>
 
       {/* ================= FINAL HOOK + EXTRA TOPICS ================= */}

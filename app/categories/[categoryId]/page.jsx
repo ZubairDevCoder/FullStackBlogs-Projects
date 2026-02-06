@@ -22,14 +22,13 @@ export default async function Page({ params }) {
           <div className="text-center md:text-left max-w-xl mx-auto py-3 animate-fadeInUp">
             <div className="text-center  max-w-2xl mx-auto py-4 animate-fadeInUp space-y-4">
               {/* Main Hook */}
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 text-indigo-700 dark:text-white">
-                {category.name} Category
-                <br />
-                <span className="text-purple-600 text-xl md:text-2xl font-medium">
-                  Tutorials & Guides
-                </span>
-              </h1>
-              <div className="flex items-center md:gap-5 gap-2   flex-col md:flex-row md:flex-nowrap">
+              <h1 className="text-3xl  font-bold my-3 text-indigo-800 dark:text-white">
+                {category.name}
+                </h1>
+              <span className="text-purple-600 text-xl md:text-2xl  font-medium">
+                Tutorials & Guides
+              </span>
+              <div className="flex items-center md:gap-5 gap-2 my-4  flex-col md:flex-row md:flex-nowrap">
                 {/* Subhook with typed animation */}
                 <h2 className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 flex-shrink-0">
                   Discover Coding Topics

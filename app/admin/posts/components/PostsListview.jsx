@@ -123,7 +123,7 @@ export default function PostsListview() {
                     <TableCell>
                       <img
                         src={post.iconURL || "/placeholder.png"}
-                        className="w-10 h-10 rounded-xl object-cover"
+                        className="w-12 h-12 rounded-xl object-contain"
                       />
                     </TableCell>
 
