@@ -78,35 +78,27 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center gap-10">
           {[
             ...baseLinks,
-            ...(isAdmin
-              ? [{ name: "Dashboard", href: "/admin", icon: LayoutDashboard }]
-              : []),
+            ...(isAdmin ? [{ name: "Dashboard", href: "/admin" }] : []),
           ].map((link) => {
-            const Icon = link.icon;
             const isActive = pathname === link.href;
 
             return (
               <li key={link.name} className="relative group">
                 <Link
                   href={link.href}
-                  className={`flex items-center gap-2 text-md font-semibold transition
-                    ${
-                      isActive
-                        ? "text-purple-600 dark:text-white"
-                        : "text-gray-700 dark:text-gray-300 hover:text-purple-500"
-                    }`}
+                  className={`flex items-center gap-2 text-lg  font-bold transition-all duration-300
+            ${
+              isActive
+                ? "text-purple-600 dark:text-white"
+                : "text-gray-700 dark:text-gray-300 hover:text-purple-500 hover:scale-105"
+            }`}
                 >
-                  <Icon size={18} />
                   {link.name}
 
                   <span
-                    className={`absolute left-0 -bottom-2 h-1  w-full bg-purple-500
-                    transition-transform origin-left duration-300
-                    ${
-                      isActive
-                        ? "scale-x-100"
-                        : "scale-x-0 group-hover:scale-x-100"
-                    }`}
+                    className={`absolute left-0 -bottom-1 h-1 w-full rounded-full bg-purple-500
+              transition-transform duration-300 ease-out origin-left
+              ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                   />
                 </Link>
               </li>

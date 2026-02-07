@@ -124,7 +124,7 @@ export default function Page() {
             target="_blank"
             className="inline-block"
           >
-            <Button className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl shadow-lg hover:scale-105 transform transition duration-300">
+            <Button className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white px-6 py-6 rounded-xl shadow-lg hover:scale-105 transform transition duration-300">
               Full Stack Development Course
             </Button>
           </Link>

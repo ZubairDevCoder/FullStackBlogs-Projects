@@ -10,20 +10,20 @@ export default function Hero() {
       {/* TOP MINI TITLE */}
       <div className="flex flex-col  items-center  justify-center gap-2 ">
         {/* Fixed width heading */}
-        <h2 className="relative text-3xl md:text-5xl  tracking-tight text-blue-700 dark:text-gray-300 flex-shrink-0  text-center font-bold">
+        <h2 className="relative text-3xl md:text-5xl  tracking-tight text-blue-700 dark:text-gray-300 flex-shrink-0  text-center font-bold mb-3">
           Welcome to Blog
         </h2>
 
         {/* Typed animation */}
-        <div className="text-blue-500 font-semibold flex-1 min-w-0 ">
+        <div className="text-blue-500 font-semibold flex-1 min-w-0 mb-3">
           <TypedCategories loop typeSpeed={80} backSpeed={50} />
         </div>
       </div>
 
       {/* MAIN TITLE */}
-      <h1 className="relative text-3xl md:text-5xl font-bold tracking-tight">
+      <h1 className="relative text-3xl md:text-5xl font-bold tracking-tight mb-6">
         Build & Scale Your <br />
-        <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+        <span className="inline-block bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent mt-5">
           SaaS Product Faster
         </span>
       </h1>
