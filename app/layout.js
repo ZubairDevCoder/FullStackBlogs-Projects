@@ -6,45 +6,124 @@ import { Toaster } from "@/components/ui/sonner";
 import { ModeToggle } from "@/components/darkMode";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Inter, Poppins } from "next/font/google";
+
+/* ✅ FAST GOOGLE FONTS (NO render-blocking) */
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
+/* ✅ STRONG SEO METADATA */
 export const metadata = {
-  title:
-    "ZubairDevCoder Blog | Full Stack Development, React, Next.js & Modern UI",
+  title: {
+    default:
+      "ZubairDevCoder Blog | Full Stack, AI, React, Next.js & Modern Web",
+    template: "%s | ZubairDevCoder Blog",
+  },
+
   description:
-    "ZubairDevCoder Blog – Learn Full Stack Web Development, React, Next.js, Firebase, Shadcn UI, Tailwind CSS, Figma, Postman, and Modern UI/UX Design. Step-by-step coding tutorials, SEO-friendly tips, and practical projects for developers.",
+    "ZubairDevCoder Blog – Learn Full Stack Development, React, Next.js, Firebase, AI, Machine Learning, Blockchain, DevOps, Cloud Computing, and Cyber Security with real-world projects and tutorials.",
+
+  keywords: [
+    "ZubairDevCoder",
+    "Full Stack Development",
+    "React.js",
+    "Next.js",
+    "Firebase",
+    "Tailwind CSS",
+    "Shadcn UI",
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Blockchain Development",
+    "Cloud Computing",
+    "Cyber Security",
+    "DevOps",
+    "Data Science",
+    "Mobile App Development",
+    "Programming Blog",
+    "Web Development Tutorials",
+  ],
+
+  authors: [{ name: "Zubair Dev Coder" }],
+  creator: "Zubair Dev Coder",
+
+  metadataBase: new URL("https://full-stack-blogs-projects.vercel.app"),
+
+  openGraph: {
+    title: "ZubairDevCoder Blog | Full Stack, AI & Modern Web Development",
+    description:
+      "Step-by-step tutorials on Full Stack Development, AI, Machine Learning, Blockchain, Cloud, DevOps & Modern UI using React & Next.js.",
+    url: "https://full-stack-blogs-projects.vercel.app",
+    siteName: "ZubairDevCoder Blog",
+    images: [
+      {
+        url: "/og-image.png", // public/og-image.png
+        width: 1200,
+        height: 630,
+        alt: "ZubairDevCoder Tech Blog",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "ZubairDevCoder Blog | Full Stack, AI & Next.js",
+    description:
+      "Learn Full Stack Development, AI, Machine Learning & Modern Web UI with practical coding tutorials.",
+    images: ["/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
+
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="antialiased dark:bg-gray-800 scrollbar-hide overflow-y-scroll overflow-hidden ">
+      <body
+        className={`${inter.variable} ${poppins.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <header className="sticky top-0 z-50  shadow-lg bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-800 mb-5 overflow-hidden">
+          {/* HEADER */}
+          <header className="sticky top-0 z-50 bg-white/90 dark:bg-gray-800/90 backdrop-blur border-b border-gray-200 dark:border-gray-700">
             <Navbar />
           </header>
 
-          <main className="max-w-7xl mx-auto scrollbar-hide overflow-hidden ">
+          {/* MAIN CONTENT */}
+          <main className="max-w-7xl mx-auto px-3 sm:px-6 py-6">
             {children}
-            <Analytics />
-            <SpeedInsights />
           </main>
-          {/* Dark/Light Toggle */}
-          <div className="fixed bottom-6 right-6 z-50 overflow-hidden">
-            <ModeToggle />
-          </div>
+
+          {/* FOOTER */}
+          <Footer />
+
+          {/* UI UTILITIES */}
+          <ModeToggle />
           <Toaster position="top-center" />
+
+          {/* ANALYTICS */}
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
-        <Footer />
       </body>
     </html>
   );

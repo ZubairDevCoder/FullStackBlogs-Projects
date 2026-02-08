@@ -45,15 +45,16 @@ export default function AllPostsPage() {
 
   const renderPosts = (posts) =>
     posts.map((post) => {
-      const createdAt = post.createdAt?.seconds
-        ? new Date(post.createdAt.seconds * 1000)
-        : null;
+      // ✅ Safe timestamp handling (createdAt → updatedAt fallback)
+      const postDate =
+        post.createdAt?.toDate?.() || post.updatedAt?.toDate?.() || null;
 
       return (
         <Card
           key={post.id}
           className="group dark:bg-gray-900/40 backdrop-blur-md border border-white/20 dark:border-gray-700/40 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
         >
+          {/* IMAGE */}
           <div className="relative w-full h-48 rounded-xl overflow-hidden">
             <Image
               src={post.iconURL || "/placeholder.png"}
@@ -63,37 +64,49 @@ export default function AllPostsPage() {
             />
           </div>
 
-          <CardHeader className="px-3 py-2">
+          {/* HEADER */}
+          <CardHeader className="px-3 py-2 space-y-1">
             <CardTitle className="line-clamp-1 text-lg font-bold text-purple-700 dark:text-white">
               {post.name}
             </CardTitle>
-            {createdAt && (
+
+            {/* 📅 TIME */}
+            {postDate && (
               <div className="flex items-center gap-1 text-xs text-gray-500">
-                <Calendar className="w-4 h-4 text-yellow-500" />
-                {createdAt.toLocaleDateString()}
+                <Calendar className="w-4 h-4 text-green-500" />
+                {postDate.toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
               </div>
             )}
           </CardHeader>
 
+          {/* CONTENT */}
           <CardContent className="space-y-3 px-4">
+            {/* AUTHOR + CATEGORY */}
             <div className="flex flex-wrap items-center gap-4 text-sm font-semibold">
               <div className="flex items-center gap-2">
                 <User className="w-5 h-5 text-blue-500" />
                 <span>{post.authorName || "Admin"}</span>
               </div>
+
               <div className="flex items-center gap-2">
-                <Tag className="w-4.5 h-4.5 text-green-500" />
+                <Tag className="w-4 h-4 text-green-500" />
                 <span className="italic text-purple-500">
                   {post.categoryName || "General"}
                 </span>
               </div>
             </div>
 
+            {/* EXCERPT */}
             <p className="text-sm text-gray-800 dark:text-gray-200 line-clamp-3">
               {post.content?.replace(/<[^>]+>/g, "")}
             </p>
 
-            <Link href={`/posts/${post.id}`}>
+            {/* CTA */}
+            <Link href={`/posts/${post.slug || post.id}`}>
               <Button size="sm" className="w-full mt-2">
                 Read More →
               </Button>
@@ -102,6 +115,7 @@ export default function AllPostsPage() {
         </Card>
       );
     });
+
 
   return (
     <section className="py-8 px-6">
