@@ -24,6 +24,8 @@ const poppins = Poppins({
 
 /* ✅ STRONG SEO METADATA */
 export const metadata = {
+  metadataBase: new URL("https://full-stack-blogs-projects.vercel.app"),
+
   title: {
     default:
       "ZubairDevCoder Blog | Full Stack, AI, React, Next.js & Modern Web",
@@ -39,34 +41,25 @@ export const metadata = {
     "React.js",
     "Next.js",
     "Firebase",
-    "Tailwind CSS",
-    "Shadcn UI",
     "Artificial Intelligence",
     "Machine Learning",
     "Blockchain Development",
     "Cloud Computing",
     "Cyber Security",
-    "DevOps",
-    "Data Science",
-    "Mobile App Development",
-    "Programming Blog",
-    "Web Development Tutorials",
   ],
 
   authors: [{ name: "Zubair Dev Coder" }],
   creator: "Zubair Dev Coder",
 
-  metadataBase: new URL("https://full-stack-blogs-projects.vercel.app"),
-
   openGraph: {
     title: "ZubairDevCoder Blog | Full Stack, AI & Modern Web Development",
     description:
-      "Step-by-step tutorials on Full Stack Development, AI, Machine Learning, Blockchain, Cloud, DevOps & Modern UI using React & Next.js.",
-    url: "https://full-stack-blogs-projects.vercel.app",
+      "Step-by-step tutorials on Full Stack Development, AI, Machine Learning, Blockchain, Cloud & DevOps.",
+    url: "/",
     siteName: "ZubairDevCoder Blog",
     images: [
       {
-        url: "/og-image.png", // public/og-image.png
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "ZubairDevCoder Tech Blog",
@@ -80,12 +73,14 @@ export const metadata = {
     card: "summary_large_image",
     title: "ZubairDevCoder Blog | Full Stack, AI & Next.js",
     description:
-      "Learn Full Stack Development, AI, Machine Learning & Modern Web UI with practical coding tutorials.",
+      "Learn Full Stack Development, AI & Modern Web UI with practical tutorials.",
     images: ["/og-image.png"],
   },
+
   verification: {
     google: "googlee2480a318705e5c1",
   },
+
   robots: {
     index: true,
     follow: true,

@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://full-stack-blogs-projects.vercel.app/Sitemap.xml
