@@ -94,6 +94,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${inter.variable} ${poppins.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
       >
+        <head>
+          <meta
+            name="google-site-verification"
+            content="v8MZvG8XOHVTu6bd_307APE4IvEwf7MXBp1eO0945iI"
+          />
+        </head>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
