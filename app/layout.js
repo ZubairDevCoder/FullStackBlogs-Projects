@@ -83,7 +83,9 @@ export const metadata = {
       "Learn Full Stack Development, AI, Machine Learning & Modern Web UI with practical coding tutorials.",
     images: ["/og-image.png"],
   },
-
+  verification: {
+    google: "googlee2480a318705e5c1",
+  },
   robots: {
     index: true,
     follow: true,
